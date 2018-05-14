@@ -1,0 +1,7 @@
+/Users/hothucdong/Workplace/DatabaseSync/src/main/java/shippo/sync/main/DatabaseSyncMain.java
+/Users/hothucdong/Workplace/DatabaseSync/src/main/java/shippo/sync/kafka/KafkaConsumer.java
+/Users/hothucdong/Workplace/DatabaseSync/src/main/java/shippo/sync/entities/Customer.java
+/Users/hothucdong/Workplace/DatabaseSync/src/main/java/shippo/sync/entities/Customers.java
+/Users/hothucdong/Workplace/DatabaseSync/src/main/java/shippo/sync/entities/Event.java
+/Users/hothucdong/Workplace/DatabaseSync/src/main/java/shippo/sync/worker/SyncWorker.java
+/Users/hothucdong/Workplace/DatabaseSync/src/main/java/shippo/sync/kafka/KafkaProducer.java

@@ -1,0 +1,2 @@
+ALTER TABLE `inventory`.`customers` ADD COLUMN `source` VARCHAR(45) NULL AFTER `email`;
+create table customers (id INT(11),first_name VARCHAR(45),last_name VARCHAR(45),email VARCHAR(45),version INT DEFAULT 1);
