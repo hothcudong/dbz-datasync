@@ -1,6 +1,6 @@
 import com.google.gson.Gson;
 import org.json.JSONObject;
-import shippo.sync.entities.Customers;
+import shippo.sync.entities.database.v0.Customers;
 
 /**
  * Created by copper on 08/05/2018.

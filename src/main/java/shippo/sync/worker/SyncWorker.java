@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import shippo.sync.entities.Customer;
+import shippo.sync.entities.events.Customer;
 import shippo.sync.kafka.KafkaConsumer;
 
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class SyncWorker extends KafkaConsumer{
     private static Map<String, Integer> dbMap = new HashMap();
     private static Map<String, EbeanServer> datasourceMap = new HashMap();
     private String targetSource;
-    private EbeanServer datasourceV0,datasourceV1;
+    private EbeanServer datasourceV0, datasourceV1;
 
     private static final char UPDATE = 'u';
     private static final char CREATE = 'c';
@@ -47,17 +47,17 @@ public class SyncWorker extends KafkaConsumer{
 
     protected void processMessage(byte[] data) throws Exception {
         // build json object
-        JSONObject json = new JSONObject(new String(data));
-        LOG.info("Kafka consumer for topic {}, received event {}", getTopic(), json.toString());
+        JSONObject event = new JSONObject(new String(data));
+        LOG.info("Kafka consumer for topic {}, received event {}", getTopic(), event.toString());
 
-        if(json.isNull("payload")){
+        if(event.isNull("payload")){
             return;
         }
 
-        JSONObject payload = (JSONObject) json.get("payload");
+        JSONObject payload = (JSONObject) event.get("payload");
 
 
-        LOG.info("Object payload: {}",json.get("payload").toString());
+        LOG.info("Object payload: {}", event.get("payload").toString());
         syncData(payload);
         // apply action tto entity object in wanted desired database
     }
@@ -70,10 +70,10 @@ public class SyncWorker extends KafkaConsumer{
             LOG.info("Event has no operation");
             return;
         }
-        String type = payload.getString("op");
+        char type = getOperation(payload);
         // check if (dupblicate) => not sync;
 
-        switch (type.charAt(0)){
+        switch (type){
             case CREATE :{
                 // insert into database
                 insert(payload, dbName);
@@ -166,6 +166,11 @@ public class SyncWorker extends KafkaConsumer{
         String database = source.getString("db");
         LOG.info("Event was generated from database {}", database);
         return database;
+    }
+
+    public char getOperation(JSONObject payload){
+        String type = payload.getString("op");
+        return type.charAt(0);
     }
 
 

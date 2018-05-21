@@ -1,8 +1,0 @@
-shippo/sync/entities/Customers.class
-shippo/sync/kafka/KafkaConsumer$1.class
-shippo/sync/main/DatabaseSyncMain.class
-shippo/sync/kafka/KafkaConsumer.class
-shippo/sync/kafka/KafkaProducer.class
-shippo/sync/entities/Event.class
-shippo/sync/entities/Customer.class
-shippo/sync/worker/SyncWorker.class
